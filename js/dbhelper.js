@@ -218,4 +218,33 @@ class DBHelper {
     return marker;
   }
 
+  /**
+   * Add a restaurant review.
+   */
+  static addRestaurantReview(restaurant, name, rating, comments) {
+    fetch(`${DBHelper.DATABASE_URL}/reviews/`, {
+      method: 'post',
+      body: JSON.stringify({
+        "restaurant_id": restaurant.id,
+        "name": name,
+        "rating": rating,
+        "comments": comments
+      })
+    }).then(data => {
+        if (data.status === 201) location.reload();
+        console.log('review created: ', data)
+    })
+  }
+
+  /**
+   * Add restaurant as favorite.
+   */
+   static addRemoveRestaurantFavorite(restaurant, isFav) {
+     fetch(`${DBHelper.DATABASE_URL}/restaurants/${restaurant.id}/?is_favorite=${isFav}`, {
+       method: 'put'
+     })
+     .then(data => {
+        console.log('Favorite restaurant added: ', data)
+     })
+   }
 }

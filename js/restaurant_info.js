@@ -49,13 +49,34 @@ fetchRestaurantFromURL = (callback) => {
 }
 
 /**
+ * Returns heart element
+ */
+buildHeart = () => {
+  let heart = document.createElement('span');
+  heart.textContent = " ♥";
+  heart.classList += 'heart';
+
+  return heart;
+}
+
+/**
  * Create restaurant HTML and add it to the webpage
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.querySelector('.restaurant-name');
-  name.innerHTML = restaurant.name;
+  if (restaurant.is_favorite == 'true') {
+    name.innerHTML = restaurant.name
+    name.appendChild(buildHeart());
+    document.querySelector('.remove-fav').style.display = 'inline';
+    document.querySelector('.add-fav').style.display = 'none';
+  }
+  else {
+    name.innerHTML = restaurant.name;
+    document.querySelector('.remove-fav').style.display = 'none';
+    document.querySelector('.add-fav').style.display = 'inline';
+  }
 
-  const address = document.querySelector('.restaurant-address');
+  const address = document.querySelector('.restaurant-address span');
   address.innerHTML = restaurant.address;
 
   const sourceLg = document.createElement('source');
@@ -116,7 +137,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 fillReviewsHTML = () => {
   DBHelper.fetchAllRestaurantReviews(self.restaurant.id, (err, reviews) => {
-    const container = document.querySelector('.reviews-container');
+    const container = document.querySelector('.reviews-container div');
 
     if (!reviews) {
       const noReviews = document.createElement('p');
@@ -187,3 +208,103 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+/**
+ * Get review from form.
+ */
+getReviewFormData = (callback) => {
+  let name = document.querySelector('input[name="name"]').value;
+  let rating = document.querySelector('input[name="rating"]').value
+  let comments = document.querySelector('textarea[name="comments"]').value;
+
+  callback(null, {name, rating, comments});
+}
+
+/**
+ * Highlight all stars gold before and including star that is clicked. Mark
+ * all stars after clicked star black.
+ */
+(() => {
+  let stars = document.querySelectorAll('.star-container .star');
+  let ratingInput = document.querySelector('input[name="rating"]');
+  stars.forEach((star, index) => {
+    if(star.style.color === "" || this.style.color === "#000") {
+      star.addEventListener('click', () => {
+        ratingInput.value = star.getAttribute('data-rating');
+        for(let gold = index; gold >= 0; gold--) {
+          stars[gold].style.color = "gold";
+        }
+
+        for(let black = index + 1; black < stars.length; black++) {
+          stars[black].style.color = "#000";
+        }
+      });
+    }
+    else {
+      this.style.color = "#000";
+    }
+  })
+})();
+
+/**
+ * Show review form
+ */
+document.querySelector('.add-review').addEventListener('click', () => {
+  document.querySelector('.reviews-container form').classList.toggle('hide');
+});
+
+/**
+ * Submit review
+ */
+document.querySelector('.submit-review').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  fetchRestaurantFromURL((err, restaurant) => {
+    getReviewFormData((err, data) => {
+      DBHelper.addRestaurantReview(restaurant, data.name, data.rating, data.comments);
+    });
+  });
+});
+
+/**
+ * Add favorite restaurant
+ */
+document.querySelector('.add-fav').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  document.querySelector('.remove-fav').style.display = 'inline';
+  document.querySelector('.add-fav').style.display = 'none';
+
+  document.querySelector('.restaurant-name').append(buildHeart());
+
+  fetchRestaurantFromURL((err, restaurant) => {
+    DBHelper.addRemoveRestaurantFavorite(restaurant, true);
+  });
+});
+
+/**
+ * Add favorite restaurant
+ */
+document.querySelector('.remove-fav').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  document.querySelector('.add-fav').style.display = 'inline';
+  document.querySelector('.remove-fav').style.display = 'none';
+  document.querySelector('.heart').remove();
+
+  fetchRestaurantFromURL((err, restaurant) => {
+    DBHelper.addRemoveRestaurantFavorite(restaurant, false);
+  });
+});
+
+document.querySelector('.remove-fav').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  document.querySelector('.add-fav').style.display = 'inline';
+  document.querySelector('.remove-fav').style.display = 'none';
+  document.querySelector('.heart').remove();
+
+  fetchRestaurantFromURL((err, restaurant) => {
+    DBHelper.addRemoveRestaurantFavorite(restaurant, false);
+  });
+});

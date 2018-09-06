@@ -69,8 +69,9 @@
           "Sunday": "11:30 am - 2:00 am"
         },
         "createdAt": 1504095571434,
-        "updatedAt": 1504095571434,
-        "id": 3
+        "updatedAt": "2018-09-06T16:44:32.684Z",
+        "id": 3,
+        "is_favorite": "true"
       },
       {
         "name": "Katz's Delicatessen",
@@ -92,8 +93,8 @@
           "Sunday": "Sat - 10:30 pm"
         },
         "createdAt": 1504095567091,
-        "updatedAt": 1504095567091,
-        "is_favorite": false,
+        "updatedAt": "2018-09-06T03:36:13.466Z",
+        "is_favorite": "true",
         "id": 4
       },
       {
@@ -238,6 +239,21 @@
         "updatedAt": 1504095567183,
         "is_favorite": false,
         "id": 10
+      },
+      {
+        "createdAt": "2018-09-06T01:26:05.976Z",
+        "updatedAt": "2018-09-06T01:26:05.976Z",
+        "id": 11
+      },
+      {
+        "createdAt": "2018-09-06T01:27:51.911Z",
+        "updatedAt": "2018-09-06T01:27:51.911Z",
+        "id": 12
+      },
+      {
+        "createdAt": "2018-09-06T01:29:13.181Z",
+        "updatedAt": "2018-09-06T01:29:13.181Z",
+        "id": 13
       }
     ],
     "reviews": [
@@ -525,6 +541,193 @@
         "createdAt": "2018-09-05T03:50:12.262Z",
         "updatedAt": "2018-09-05T03:50:12.262Z",
         "id": 32
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Stacy",
+        "rating": "5",
+        "comments": "test",
+        "createdAt": "2018-09-05T22:23:58.889Z",
+        "updatedAt": "2018-09-05T22:23:58.889Z",
+        "id": 33
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Ron",
+        "rating": "2",
+        "comments": "not good.",
+        "createdAt": "2018-09-05T22:29:55.832Z",
+        "updatedAt": "2018-09-05T22:29:55.832Z",
+        "id": 34
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Larry",
+        "rating": "3",
+        "comments": "Good place",
+        "createdAt": "2018-09-06T00:16:04.841Z",
+        "updatedAt": "2018-09-06T00:16:04.841Z",
+        "id": 35
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Lucy",
+        "rating": "4",
+        "comments": "should serve cat food.",
+        "createdAt": "2018-09-06T00:21:58.468Z",
+        "updatedAt": "2018-09-06T00:21:58.468Z",
+        "id": 36
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Kevin",
+        "rating": "5",
+        "comments": "test test",
+        "createdAt": "2018-09-06T00:22:21.084Z",
+        "updatedAt": "2018-09-06T00:22:21.084Z",
+        "id": 37
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Ben",
+        "rating": "1",
+        "comments": "bad",
+        "createdAt": "2018-09-06T00:27:46.876Z",
+        "updatedAt": "2018-09-06T00:27:46.876Z",
+        "id": 38
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Don",
+        "rating": "4",
+        "comments": "sfasdfa",
+        "createdAt": "2018-09-06T00:28:06.510Z",
+        "updatedAt": "2018-09-06T00:28:06.510Z",
+        "id": 39
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Merv",
+        "rating": "3",
+        "comments": "kewl",
+        "createdAt": "2018-09-06T00:30:41.638Z",
+        "updatedAt": "2018-09-06T00:30:41.638Z",
+        "id": 40
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Karl",
+        "rating": "3",
+        "comments": "!!",
+        "createdAt": "2018-09-06T00:31:18.635Z",
+        "updatedAt": "2018-09-06T00:31:18.635Z",
+        "id": 41
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Barry",
+        "rating": "3",
+        "comments": "hi",
+        "createdAt": "2018-09-06T00:37:56.997Z",
+        "updatedAt": "2018-09-06T00:37:56.997Z",
+        "id": 42
+      },
+      {
+        "restaurant_id": 4,
+        "name": "asdfas",
+        "rating": "4",
+        "comments": "asdf",
+        "createdAt": "2018-09-06T00:39:04.404Z",
+        "updatedAt": "2018-09-06T00:39:04.404Z",
+        "id": 43
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Stacyyyy",
+        "rating": "1",
+        "comments": "testsss",
+        "createdAt": "2018-09-06T00:44:46.577Z",
+        "updatedAt": "2018-09-06T00:44:46.577Z",
+        "id": 44
+      },
+      {
+        "name": "Donn",
+        "rating": "4",
+        "comments": "sdfsdf",
+        "createdAt": "2018-09-06T00:45:08.548Z",
+        "updatedAt": "2018-09-06T00:45:08.548Z",
+        "id": 45
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Barg",
+        "rating": "1",
+        "comments": "dfff",
+        "createdAt": "2018-09-06T00:52:00.770Z",
+        "updatedAt": "2018-09-06T00:52:00.770Z",
+        "id": 46
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Fen",
+        "rating": "4",
+        "comments": "hiiii",
+        "createdAt": "2018-09-06T00:52:47.989Z",
+        "updatedAt": "2018-09-06T00:52:47.989Z",
+        "id": 47
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Glug",
+        "rating": "3",
+        "comments": "fefe",
+        "createdAt": "2018-09-06T00:53:20.256Z",
+        "updatedAt": "2018-09-06T00:53:20.256Z",
+        "id": 48
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Benf",
+        "rating": "3",
+        "comments": "ewwe",
+        "createdAt": "2018-09-06T00:54:40.268Z",
+        "updatedAt": "2018-09-06T00:54:40.268Z",
+        "id": 49
+      },
+      {
+        "restaurant_id": 4,
+        "name": "dsdfsdf",
+        "rating": "3",
+        "comments": "sdfsfsdf",
+        "createdAt": "2018-09-06T00:55:23.158Z",
+        "updatedAt": "2018-09-06T00:55:23.158Z",
+        "id": 50
+      },
+      {
+        "restaurant_id": 4,
+        "name": "ewewe",
+        "rating": "3",
+        "comments": "werwer",
+        "createdAt": "2018-09-06T00:57:00.443Z",
+        "updatedAt": "2018-09-06T00:57:00.443Z",
+        "id": 51
+      },
+      {
+        "restaurant_id": 3,
+        "name": "",
+        "comments": "",
+        "createdAt": "2018-09-06T04:53:05.440Z",
+        "updatedAt": "2018-09-06T04:53:05.440Z",
+        "id": 52
+      },
+      {
+        "restaurant_id": 3,
+        "name": "John",
+        "rating": "4",
+        "comments": "Rating test",
+        "createdAt": "2018-09-06T16:44:07.946Z",
+        "updatedAt": "2018-09-06T16:44:07.946Z",
+        "id": 53
       }
     ]
   },
@@ -577,10 +780,10 @@
       "id": 10
     },
     "restaurants": {
-      "id": 10
+      "id": 13
     },
     "reviews": {
-      "id": 32
+      "id": 53
     }
   }
 }

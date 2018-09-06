@@ -28,7 +28,7 @@
       </picture>
       <p class="restaurant-cuisine"></p>
       <section class="restaurant-info-container">
-        <p class="restaurant-address"></p>
+        <p class="restaurant-address"><span></span></p>
         <table class="restaurant-hours"></table>
       </section>
     </section>
@@ -38,21 +38,36 @@
     </section>
 
     <section class="reviews-container">
-      <h2>Reviews</h2>
-      <button class="add-review btn">Add Review</button>
-      <button class="add-review btn">Add as Favorite</button>
-      <form action="" method="post">
-        <label>Name:<input type="text" name="name"></label><br>
-        Rating:
-        <label><input type="radio" name="rating" value="1">1</label>
-        <label><input type="radio" name="rating" value="2">2</label>
-        <label><input type="radio" name="rating" value="3">3</label>
-        <label><input type="radio" name="rating" value="4">4</label>
-        <label><input type="radio" name="rating" value="5">5</label><br>
-        <label>Comments:<textarea name="comments"></textarea>
-        <button id="submit-review" class="btn">Submit</button>
-      </form>
-      <ul class="reviews-list"></ul>
+      <div>
+        <h2>Reviews</h2>
+        <button class="add-review btn">Add Review</button>
+        <button class="add-fav btn">Add Favorite</button>
+        <button class="remove-fav btn">Remove Favorite</button>
+
+        <form action="" method="post" class="hide">
+          <div>
+            <label for="name">Name<br><input type="text" name="name"></label>
+          </div>
+          <div>
+            <label for="comments">Comments<br><textarea name="comments"></textarea><label>
+          </div>
+          <div>
+            <div class="rating">
+              Rating<br>
+              <span class="star-container">
+                <span data-rating="1" class="star">★</span>
+                <span data-rating="2" class="star">★</span>
+                <span data-rating="3" class="star">★</span>
+                <span data-rating="4" class="star">★</span>
+                <span data-rating="5" class="star">★</span>
+              </span>
+            </div>
+          </div>
+          <input type="hidden" name="rating">
+          <button class="submit-review btn">Submit</button>
+        </form>
+        <ul class="reviews-list"></ul>
+      </div>
     </section>
   </main>
 
