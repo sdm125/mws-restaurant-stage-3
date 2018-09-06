@@ -163,17 +163,26 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   let reviewDate = new Date(review.createdAt);
+  let stars = "";
 
   name.innerHTML = review.name;
+  name.classList += 'review-name';
   li.appendChild(name);
 
-  const date = document.createElement('p');
+  const date = document.createElement('div');
 
   date.innerHTML = `${months[reviewDate.getMonth()]} ${reviewDate.getDate()}, ${reviewDate.getFullYear()}`;
+  date.classList += 'date';
   li.appendChild(date);
 
   const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
+  rating.classList += 'gold-star';
+
+  for(let star = 0; star < parseInt(review.rating); star++) {
+    stars += "★";
+  }
+
+  rating.innerHTML = `${stars}`;
   li.appendChild(rating);
 
   const comments = document.createElement('p');

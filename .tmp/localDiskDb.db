@@ -69,7 +69,7 @@
           "Sunday": "11:30 am - 2:00 am"
         },
         "createdAt": 1504095571434,
-        "updatedAt": "2018-09-06T16:44:32.684Z",
+        "updatedAt": "2018-09-06T23:15:18.558Z",
         "id": 3,
         "is_favorite": "true"
       },
@@ -728,6 +728,33 @@
         "createdAt": "2018-09-06T16:44:07.946Z",
         "updatedAt": "2018-09-06T16:44:07.946Z",
         "id": 53
+      },
+      {
+        "restaurant_id": 3,
+        "name": "Fred",
+        "rating": "2",
+        "comments": "another ratings test",
+        "createdAt": "2018-09-06T16:58:23.217Z",
+        "updatedAt": "2018-09-06T16:58:23.217Z",
+        "id": 54
+      },
+      {
+        "restaurant_id": 3,
+        "name": "Stacy",
+        "rating": "5",
+        "comments": "another rating testttttt",
+        "createdAt": "2018-09-06T17:04:54.811Z",
+        "updatedAt": "2018-09-06T17:04:54.811Z",
+        "id": 55
+      },
+      {
+        "restaurant_id": 3,
+        "name": "",
+        "rating": "1",
+        "comments": "",
+        "createdAt": "2018-09-06T23:12:16.273Z",
+        "updatedAt": "2018-09-06T23:12:16.273Z",
+        "id": 56
       }
     ]
   },
@@ -783,7 +810,7 @@
       "id": 13
     },
     "reviews": {
-      "id": 53
+      "id": 56
     }
   }
 }
