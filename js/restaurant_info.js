@@ -65,7 +65,7 @@ buildHeart = () => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.querySelector('.restaurant-name');
   if (restaurant.is_favorite == 'true') {
-    name.innerHTML = restaurant.name
+    name.innerHTML = restaurant.name;
     name.appendChild(buildHeart());
     document.querySelector('.remove-fav').style.display = 'inline';
     document.querySelector('.add-fav').style.display = 'none';

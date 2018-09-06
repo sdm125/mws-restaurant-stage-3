@@ -200,9 +200,13 @@ createRestaurantHTML = (restaurant) => {
 
   li.append(picture);
 
-  const name = document.createElement('h2');
+  const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
   container.append(name);
+
+  if (restaurant.is_favorite == 'true') {
+    name.innerHTML += ' ♥';
+  }
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
