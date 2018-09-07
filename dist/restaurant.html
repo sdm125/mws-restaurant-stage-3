@@ -28,7 +28,7 @@
       </picture>
       <p class="restaurant-cuisine"></p>
       <section class="restaurant-info-container">
-        <p class="restaurant-address"></p>
+        <p class="restaurant-address"><span></span></p>
         <table class="restaurant-hours"></table>
       </section>
     </section>
@@ -38,8 +38,36 @@
     </section>
 
     <section class="reviews-container">
-      <h2>Reviews</h2>
-      <ul class="reviews-list"></ul>
+      <div>
+        <h2>Reviews</h2>
+        <button class="add-review btn">Add Review</button>
+        <button class="add-fav btn">Add Favorite</button>
+        <button class="remove-fav btn">Remove Favorite</button>
+
+        <form action="" method="post" class="hide">
+          <div>
+            <label for="name">Name<br><input type="text" name="name" required></label>
+          </div>
+          <div>
+            <label for="comments">Comments<br><textarea name="comments" required></textarea><label>
+          </div>
+          <div>
+            <div class="rating">
+              Rating<br>
+              <span class="star-container">
+                <span data-rating="1" class="star">★</span>
+                <span data-rating="2" class="star">★</span>
+                <span data-rating="3" class="star">★</span>
+                <span data-rating="4" class="star">★</span>
+                <span data-rating="5" class="star">★</span>
+              </span>
+            </div>
+          </div>
+          <input type="hidden" name="rating" value="" required>
+          <button class="submit-review btn">Submit</button>
+        </form>
+        <ul class="reviews-list"></ul>
+      </div>
     </section>
   </main>
 
@@ -47,7 +75,10 @@
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
 
-  <script charset="utf-8" src="js/scripts.min.js"></script>
+  <script charset="utf-8" src="js/scripts.min.js"></script> 
+  <!-- <script charset="utf-8" src="js/dbhelper.js"></script> -->
+  <!-- <script charset="utf-8" src="js/idb.js"></script>
+  <script charset="utf-8" src="js/restaurant_info.js"></script> -->
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD0iOQ-NO0l0VOGTRdtlljQlCsGLFfg7M&libraries=places&callback=initMap"></script>
   <!-- End scripts -->

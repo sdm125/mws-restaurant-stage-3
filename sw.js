@@ -4,10 +4,7 @@ self.addEventListener('install', function(event) {
       return cache.addAll([
         '/',
         '/restaurant.html',
-        'js/dbhelper.js',
-        'js/idb.js',
-        'js/main.js',
-        'js/restaurant_info.js',
+        'js/scripts.min.js',
         'css/styles.css',
         'img/1_400.jpg',
         'img/2_400.jpg',

@@ -246,7 +246,6 @@ class DBHelper {
         "rating": rating,
         "comments": comments
       })
-
     }).then(response => {
         if (!response.ok) throw Error(response.statusText);
         else if (response.status === 201) location.reload();

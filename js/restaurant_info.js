@@ -85,19 +85,19 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.querySelector('.restaurant-img');
 
   sourceLg.className = 'restaurant-img';
-  sourceLg.alt = restaurant.alt;
+  sourceLg.alt = restaurant.name;
   sourceLg.media = "(min-width: 500px)";
   sourceLg.srcset = DBHelper.imageUrlForRestaurant(restaurant, 'lg');
   image.append(sourceLg);
 
   sourceSm.className = 'restaurant-img';
-  sourceSm.alt = restaurant.alt;
+  sourceSm.alt = restaurant.name;
   sourceSm.media = "(max-width: 500px)";
   sourceSm.srcset = DBHelper.imageUrlForRestaurant(restaurant, 'sm');
   image.append(sourceSm);
 
   defaultImg.className = 'restaurant-img';
-  defaultImg.alt = restaurant.alt;
+  defaultImg.alt = restaurant.name;
   defaultImg.src = DBHelper.imageUrlForRestaurant(restaurant, 'lg');
   image.append(defaultImg);
 
@@ -255,72 +255,79 @@ getReviewFormData = (callback) => {
   })
 })();
 
-/**
- * Show review form
- */
-document.querySelector('.add-review').addEventListener('click', () => {
-  document.querySelector('.reviews-container form').classList.toggle('hide');
-});
+if(document.querySelector('.add-review')){
+  /**
+   * Show review form
+   */
+  document.querySelector('.add-review').addEventListener('click', () => {
+    document.querySelector('.reviews-container form').classList.toggle('hide');
+  });
 
-/**
- * Submit review
- */
-document.querySelector('.submit-review').addEventListener('click', (e) => {
-  e.preventDefault();
+  /**
+   * Submit review
+   */
+  document.querySelector('.submit-review').addEventListener('click', (e) => {
+    e.preventDefault();
 
-  fetchRestaurantFromURL((err, restaurant) => {
-    getReviewFormData((err, data) => {
-      DBHelper.addRestaurantReview(restaurant, data.name, data.rating, data.comments);
+    fetchRestaurantFromURL((err, restaurant) => {
+      getReviewFormData((err, data) => {
+        if (data.name !== "" && data.rating !== "" && data.comments !== "") {
+          DBHelper.addRestaurantReview(restaurant, data.name, data.rating, data.comments);
+        }
+        else {
+          alert("Please fill in all review form fields.");
+        }
+      });
     });
   });
-});
 
-/**
- * Update server with offline reviews
- */
-window.addEventListener('online', ()=> {
-  DBHelper.uploadOfflineReviews();
-})
+  /**
+   * Update server with offline reviews
+   */
+  window.addEventListener('online', ()=> {
+    DBHelper.uploadOfflineReviews();
+  })
 
-/**
- * Add favorite restaurant
- */
-document.querySelector('.add-fav').addEventListener('click', (e) => {
-  e.preventDefault();
+  /**
+   * Add favorite restaurant
+   */
+  document.querySelector('.add-fav').addEventListener('click', (e) => {
+    e.preventDefault();
 
-  document.querySelector('.remove-fav').style.display = 'inline';
-  document.querySelector('.add-fav').style.display = 'none';
+    document.querySelector('.remove-fav').style.display = 'inline';
+    document.querySelector('.add-fav').style.display = 'none';
 
-  document.querySelector('.restaurant-name').append(buildHeart());
+    document.querySelector('.restaurant-name').append(buildHeart());
 
-  fetchRestaurantFromURL((err, restaurant) => {
-    DBHelper.addRemoveRestaurantFavorite(restaurant, true);
+    fetchRestaurantFromURL((err, restaurant) => {
+      DBHelper.addRemoveRestaurantFavorite(restaurant, true);
+    });
   });
-});
 
-/**
- * Add favorite restaurant
- */
-document.querySelector('.remove-fav').addEventListener('click', (e) => {
-  e.preventDefault();
+  /**
+   * Add favorite restaurant
+   */
+  document.querySelector('.remove-fav').addEventListener('click', (e) => {
+    e.preventDefault();
 
-  document.querySelector('.add-fav').style.display = 'inline';
-  document.querySelector('.remove-fav').style.display = 'none';
-  document.querySelector('.heart').remove();
+    document.querySelector('.add-fav').style.display = 'inline';
+    document.querySelector('.remove-fav').style.display = 'none';
+    document.querySelector('.heart').remove();
 
-  fetchRestaurantFromURL((err, restaurant) => {
-    DBHelper.addRemoveRestaurantFavorite(restaurant, false);
+    fetchRestaurantFromURL((err, restaurant) => {
+      DBHelper.addRemoveRestaurantFavorite(restaurant, false);
+    });
   });
-});
 
-document.querySelector('.remove-fav').addEventListener('click', (e) => {
-  e.preventDefault();
+  document.querySelector('.remove-fav').addEventListener('click', (e) => {
+    e.preventDefault();
 
-  document.querySelector('.add-fav').style.display = 'inline';
-  document.querySelector('.remove-fav').style.display = 'none';
-  document.querySelector('.heart').remove();
+    document.querySelector('.add-fav').style.display = 'inline';
+    document.querySelector('.remove-fav').style.display = 'none';
+    document.querySelector('.heart').remove();
 
-  fetchRestaurantFromURL((err, restaurant) => {
-    DBHelper.addRemoveRestaurantFavorite(restaurant, false);
+    fetchRestaurantFromURL((err, restaurant) => {
+      DBHelper.addRemoveRestaurantFavorite(restaurant, false);
+    });
   });
-});
+}

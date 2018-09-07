@@ -1163,6 +1163,42 @@
         "comments": "good",
         "id": 12,
         "updatedAt": "2018-09-07T05:56:36.336Z"
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Kelly",
+        "rating": "5",
+        "comments": "this place is good :)",
+        "createdAt": "2018-09-07T06:21:59.481Z",
+        "updatedAt": "2018-09-07T06:21:59.481Z",
+        "id": 73
+      },
+      {
+        "restaurant_id": 1,
+        "name": "f",
+        "rating": "5",
+        "comments": "f",
+        "createdAt": "2018-09-07T06:24:36.082Z",
+        "updatedAt": "2018-09-07T06:24:36.082Z",
+        "id": 74
+      },
+      {
+        "restaurant_id": 2,
+        "name": "z1",
+        "rating": "5",
+        "comments": "z1",
+        "createdAt": "2018-09-07T06:26:55.104Z",
+        "updatedAt": "2018-09-07T06:26:55.104Z",
+        "id": 75
+      },
+      {
+        "restaurant_id": 2,
+        "createdAt": 1536301640.545,
+        "name": "a1",
+        "rating": "3",
+        "comments": "a1",
+        "id": 1,
+        "updatedAt": "2018-09-07T06:27:25.219Z"
       }
     ]
   },
@@ -1218,7 +1254,7 @@
       "id": 13
     },
     "reviews": {
-      "id": 72
+      "id": 75
     }
   }
 }
