@@ -136,7 +136,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  * Fetch all reviews and add them to the webpage.
  */
 fillReviewsHTML = () => {
-  DBHelper.fetchAllRestaurantReviews(self.restaurant.id, (err, reviews) => {
+  DBHelper.fetchRestaurantReviews(self.restaurant.id, (err, reviews) => {
     const container = document.querySelector('.reviews-container div');
 
     if (!reviews) {
@@ -274,6 +274,13 @@ document.querySelector('.submit-review').addEventListener('click', (e) => {
     });
   });
 });
+
+/**
+ * Update server with offline reviews
+ */
+window.addEventListener('online', ()=> {
+  DBHelper.uploadOfflineReviews();
+})
 
 /**
  * Add favorite restaurant

@@ -18,7 +18,9 @@ class DBHelper {
    */
   static getLocalDatabase() {
     return idb.open('restaurant-reviews-data', 1, (upgradeDb) => {
-      const store = upgradeDb.createObjectStore('restaurant-reviews', { keyPath: 'id' });
+      upgradeDb.createObjectStore('restaurants', { keyPath: 'id' });
+      upgradeDb.createObjectStore('reviews', { keyPath: "id", autoIncrement: true });
+      upgradeDb.createObjectStore('offline-temp', { keyPath: "id", autoIncrement: true });
     });
   }
 
@@ -26,27 +28,24 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-    const restaurantsData = fetch(`${DBHelper.DATABASE_URL}/restaurants/`)
-    .then(response => {
-      if (!response.ok) { Error(response.statusText); }
+    fetch(`${DBHelper.DATABASE_URL}/restaurants/`).then(response => {
+      if (!response.ok) throw Error(response.statusText);
       return response.json();
-    })
-    .then(restaurants => {
+    }).then(restaurants => {
       callback(null, restaurants);
       DBHelper.getLocalDatabase().then((db) => {
-        let tx = db.transaction('restaurant-reviews', 'readwrite');
-        let restaurantsStore = tx.objectStore('restaurant-reviews');
+        const tx = db.transaction('restaurants', 'readwrite');
+        const restaurantsStore = tx.objectStore('restaurants');
 
         for(let restaurant of restaurants) {
           restaurantsStore.put(restaurant);
         }
       })
-    })
-    .catch(error => {
+    }).catch(error => {
       // Use restaurant JSON from indexDB if fetch fails
       DBHelper.getLocalDatabase().then((db) => {
-        const tx = db.transaction('restaurant-reviews');
-        const restaurantsStore = tx.objectStore('restaurant-reviews');
+        const tx = db.transaction('restaurants');
+        const restaurantsStore = tx.objectStore('restaurants');
 
         return restaurantsStore.getAll();
       }).then(restaurants => {
@@ -58,17 +57,34 @@ class DBHelper {
   /**
    * Fetch all reviews for a restaurant.
    */
-  static fetchAllRestaurantReviews(id, callback) {
+  static fetchRestaurantReviews(id, callback) {
     // fetch all restaurants with proper error handling.
     fetch(`${DBHelper.DATABASE_URL}/reviews/?restaurant_id=${id}`)
     .then(response => {
-      if (!response.ok) Error(response.statusText)
+      if (!response.ok) throw Error(response.statusText);
       return response.json();
-    })
-    .then(reviews => {
+    }).then(reviews => {
       callback(null, reviews);
-    })
-    .catch(error => console.log(error))
+      DBHelper.getLocalDatabase().then((db) => {
+        const tx = db.transaction('reviews', 'readwrite');
+        const reviewsStore = tx.objectStore('reviews');
+
+        for(let review of reviews) {
+          reviewsStore.put(review);
+        }
+      })
+    }).catch(error => {
+      // Use restaurant JSON from indexDB if fetch fails
+      DBHelper.getLocalDatabase().then((db) => {
+        const tx = db.transaction('reviews');
+        const reviewsStore = tx.objectStore('reviews');
+
+        return reviewsStore.getAll();
+      }).then(reviews => {
+        reviews = reviews.filter(review => review.restaurant_id === id);
+        callback(null, reviews);
+      })
+    });
   }
 
   /**
@@ -230,9 +246,68 @@ class DBHelper {
         "rating": rating,
         "comments": comments
       })
-    }).then(data => {
-        if (data.status === 201) location.reload();
+
+    }).then(response => {
+        if (!response.ok) throw Error(response.statusText);
+        else if (response.status === 201) location.reload();
         console.log('review created: ', data)
+    }).catch(error => {
+      DBHelper.getLocalDatabase().then((db) => {
+        let tx = db.transaction('reviews', 'readwrite');
+        const reviewsStore = tx.objectStore('reviews');
+        let timestamp = new Date().getTime() / 1000;
+
+        reviewsStore.put({
+          restaurant_id: restaurant.id,
+          createdAt: timestamp,
+          name: name,
+          rating: rating,
+          comments: comments
+        });
+
+        tx = db.transaction('offline-temp', 'readwrite');
+        const offlineTemp = tx.objectStore('offline-temp');
+
+        if(!navigator.onLine) {
+          offlineTemp.put({
+            restaurant_id: restaurant.id,
+            createdAt: timestamp,
+            name: name,
+            rating: rating,
+            comments: comments
+          });
+        }
+
+        location.reload();
+      });
+    });
+  }
+
+  /**
+   * Add a restaurant review.
+   */
+  static uploadOfflineReviews() {
+    DBHelper.getLocalDatabase().then((db) => {
+      let tx = db.transaction('offline-temp');
+      const offlineTemp = tx.objectStore('offline-temp');
+      return offlineTemp.getAll();
+    }).then(reviews => {
+      if (reviews) {
+        let promiseArr = [];
+        for(let i = 0; i < reviews.length; i ++) {
+          promiseArr.push(
+            fetch(`${DBHelper.DATABASE_URL}/reviews/`, {
+              method: 'post',
+              body: JSON.stringify(reviews[i])
+            })
+          );
+        }
+        Promise.all(promiseArr).then(() => {
+          DBHelper.getLocalDatabase().then((db) => {
+            db.transaction('offline-temp', 'readwrite').objectStore('offline-temp').clear();
+          })
+        });
+      }
     })
   }
 
