@@ -1,6 +1,5 @@
 const gulp  = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
-const eslint = require('gulp-eslint');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const rename = require('gulp-rename');
