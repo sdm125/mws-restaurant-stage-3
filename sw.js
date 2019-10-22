@@ -1,6 +1,6 @@
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('restaurant-reviews-v4').then(function(cache) {
+    caches.open('restaurant-reviews-v5').then(function(cache) {
       return cache.addAll([
         '/',
         '/restaurant.html',

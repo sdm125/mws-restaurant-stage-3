@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
   registerServiceWorker();
+  setTimeout(function() {
+    if (document.querySelector('.loader').style.display !== 'none') {
+      let loadingMsg = document.createElement('span');
+      loadingMsg.innerText = 'This may take a few seconds';
+      document.querySelector('.loader').appendChild(loadingMsg);
+    }
+  }, 1000);
 });
 
 /**
@@ -51,7 +58,6 @@ fetchNeighborhoods = () => {
 /**
  * Set neighborhoods HTML.
  */
-
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
   neighborhoods.forEach(neighborhood => {
@@ -60,6 +66,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     option.value = neighborhood;
     if (home) select.append(option);
   });
+  document.querySelector('.loader').style.display = 'none';
 }
 
 /**
